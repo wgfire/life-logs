@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "84393e5b8973c5c3",
+        "id": "8c0417f662b537b0",
         "type": "tabs",
         "children": [
           {
-            "id": "5b0af04c458503c4",
+            "id": "40243e198b36cfe7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "好看工具/github.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "github"
+              "title": "新标签页"
             }
           }
         ]
@@ -40,7 +36,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byModifiedTime"
+                "sortOrder": "byModifiedTime",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -162,16 +159,32 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "5b0af04c458503c4",
+  "active": "f7a2727ad1ca1cbb",
   "lastOpenFiles": [
-    "markdown/标注.md",
-    "好看工具/github.md",
-    "AI时讯/AI工具整理.md",
-    "好看工具",
     "AI时讯/AI文章地址.md",
-    "markdown",
-    "遍地思维",
-    "AI编程",
-    "AI时讯"
+    "AI时讯/AI工具整理.md",
+    "好看工具/github.md",
+    "提示词/文生图/聊天框.md",
+    "图片/Pasted image 20260105114738.png",
+    "AI编程/skills/wang-workflow/SKILL.md",
+    "AI编程/skills/wang-workflow/references/agent-prompts.md",
+    "AI编程/skills/wang-workflow/references",
+    "AI编程/skills/wang-workflow",
+    "AI编程/skills",
+    "AI编程/agents/架构师agent.md",
+    "提示词/coder/采访模式.md",
+    "AI编程/agents",
+    "提示词/人物/修图.md",
+    "提示词/文生图",
+    "图片",
+    "Pasted image 20260104142714.png",
+    "提示词/人物",
+    "Pasted image 20260104142632.png",
+    "未命名.canvas",
+    "markdown/标注.md",
+    "提示词/coder",
+    "提示词",
+    "AI编程/编程工具.md",
+    "好看工具"
   ]
 }
