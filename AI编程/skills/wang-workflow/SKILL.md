@@ -5,6 +5,12 @@ license: MIT
 metadata:
   version: 1.0.0
   model: claude-opus-4-5-20251101
+agents:
+  - agents/requirement-analysis.md
+  - agents/requirement-review.md
+  - agents/task-planning.md
+  - agents/task-implementation.md
+  - agents/task-review.md
 ---
 
 # Wang Workflow - 智能编程工作流
@@ -234,10 +240,54 @@ metadata:
 
 **处理流程**：
 1. 按顺序执行每个任务
-2. 实现前先阅读相关代码
-3. 遵循项目编码规范
-4. 应用 KISS/YAGNI/SOLID 原则
-5. 使用 TodoWrite 追踪进度
+2. 实现前先阅读相关代码，理解上下文
+3. **方案评估**：分析是否有更优解（见下方评估维度）
+4. 确定最终方案后再编码
+5. 应用 KISS/YAGNI/SOLID 原则
+6. 使用 TodoWrite 追踪进度
+
+**方案评估维度**：
+
+在编码前，从以下维度评估当前方案是否最优：
+
+| 维度 | 评估问题 | 权重 |
+|------|----------|------|
+| 扩展性 | 未来需求变化时改动量大吗？ | 高 |
+| 性能 | 有明显的性能瓶颈吗？ | 中 |
+| 交互体验 | 用户操作是否流畅自然？ | 中 |
+| 实现成本 | 开发和维护成本如何？ | 高 |
+| 代码质量 | 可读性、可测试性如何？ | 高 |
+
+**评估输出格式**：
+```markdown
+## 方案评估
+
+### 当前方案
+{简述当前的实现思路}
+
+### 备选方案（如有）
+| 方案 | 优势 | 劣势 |
+|------|------|------|
+| 方案A | ... | ... |
+| 方案B | ... | ... |
+
+### 多维度对比
+| 维度 | 当前方案 | 备选方案A | 备选方案B |
+|------|----------|-----------|-----------|
+| 扩展性 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
+| 性能 | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
+| 交互 | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| 实现成本 | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| 代码质量 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
+
+### 结论
+{选择哪个方案，为什么}
+```
+
+**决策逻辑**：
+- 如果有明显更优的方案 → 采用更优方案
+- 如果各方案各有优劣 → 根据项目当前阶段权衡（早期重扩展性，后期重性能）
+- 如果当前方案已是最优 → 直接实现
 
 **编码原则**：
 - 最简实现优先，不做过度设计
@@ -245,7 +295,7 @@ metadata:
 - 单一职责，每个函数只做一件事
 - 使用项目现有的模式和风格
 
-**输出**：完成的代码变更（通过 Edit/Write 工具）
+**输出**：方案评估报告 + 完成的代码变更
 
 ---
 
@@ -423,3 +473,60 @@ Phase 5：验证完成，流程结束
 - [ ] 代码变更符合项目规范
 - [ ] 所有需求点都有对应实现
 - [ ] Review 通过且完成度达标
+
+---
+
+## Agent 文件
+
+各阶段 Agent 的详细定义：
+
+| Agent | 文件路径 | 模型 |
+|-------|----------|------|
+| 需求分析 | `agents/requirement-analysis.md` | sonnet |
+| 需求评审 | `agents/requirement-review.md` | sonnet |
+| 任务规划 | `agents/task-planning.md` | opus |
+| 任务实现 | `agents/task-implementation.md` | opus |
+| 任务 Review | `agents/task-review.md` | sonnet |
+
+---
+
+## 执行指南
+
+当用户触发 `/wang` 命令时，按以下流程执行：
+
+### 完整流程（默认）
+```
+1. 调用 requirement-analysis Agent (sonnet) → 输出需求分析报告
+2. 调用 requirement-review Agent (sonnet) → 输出评审后需求清单
+3. 调用 task-planning Agent (opus) → 输出任务列表
+4. 调用 task-implementation Agent (opus) → 逐个完成任务
+5. 调用 task-review Agent (sonnet) → 验证完成度
+   - 完成度 100% → 流程结束
+   - 完成度 < 100% → 返回步骤 4，最多循环 3 次
+```
+
+### 快速模式（--task）
+```
+1. 跳过步骤 1-2
+2. 直接调用 task-planning Agent → 输出任务列表
+3. 调用 task-implementation Agent → 逐个完成任务
+4. 调用 task-review Agent → 验证完成度
+```
+
+### Agent 调用方式
+
+使用 Task 工具调用各阶段 Agent：
+
+```javascript
+// 示例：调用需求分析 Agent
+Task({
+  subagent_type: "general-purpose",
+  model: "sonnet",
+  prompt: `
+    请作为需求分析 Agent，分析以下用户需求：
+    ${userRequirement}
+
+    按照 requirement-analysis.md 中定义的流程和输出格式进行分析。
+  `
+})
+```

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "8c0417f662b537b0",
+        "id": "187ac15e608043bb",
         "type": "tabs",
         "children": [
           {
-            "id": "40243e198b36cfe7",
+            "id": "6c602f5e56b1f425",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -151,6 +151,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:新建数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
@@ -161,14 +162,20 @@
   },
   "active": "f7a2727ad1ca1cbb",
   "lastOpenFiles": [
+    "AI编程/skills/wang-workflow/references/agent-prompts.md",
+    "AI编程/skills/wang-workflow/agents/task-planning.md",
+    "AI编程/skills/wang-workflow/agents/requirement-review.md",
+    "AI编程/skills/wang-workflow/agents/task-review.md",
+    "AI编程/skills/wang-workflow/agents/requirement-analysis.md",
+    "AI编程/skills/wang-workflow/agents/task-implementation.md",
+    "AI编程/skills/wang-workflow/SKILL.md",
+    "AI编程/skills/wang-workflow/references",
+    "AI编程/skills/wang-workflow/agents",
     "AI时讯/AI文章地址.md",
     "AI时讯/AI工具整理.md",
     "好看工具/github.md",
     "提示词/文生图/聊天框.md",
     "图片/Pasted image 20260105114738.png",
-    "AI编程/skills/wang-workflow/SKILL.md",
-    "AI编程/skills/wang-workflow/references/agent-prompts.md",
-    "AI编程/skills/wang-workflow/references",
     "AI编程/skills/wang-workflow",
     "AI编程/skills",
     "AI编程/agents/架构师agent.md",
@@ -184,7 +191,6 @@
     "markdown/标注.md",
     "提示词/coder",
     "提示词",
-    "AI编程/编程工具.md",
-    "好看工具"
+    "AI编程/编程工具.md"
   ]
 }
